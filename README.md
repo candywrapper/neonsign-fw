@@ -1,4 +1,4 @@
 # Firmware for neon sign
 
 ## Desciption
-The project is C++. It contains blank project for using in custom solutions.  
+C++ project wich is developed in STM32CubeIDE (v1.4.0). It contains firmware for LED indicators control through spi and 74HC595.  
