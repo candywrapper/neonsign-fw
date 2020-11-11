@@ -9,9 +9,9 @@ public:
 
 	void execute() override {
 		for(;;) {
-			delay(112230);
+			delay(500);
 			setOff(0);
-			delay(112230);
+			delay(500);
 			setOn(0);
 		}
 	}

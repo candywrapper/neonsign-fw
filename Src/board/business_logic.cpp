@@ -1,9 +1,16 @@
 #include "business_logic.h"
 #include "stm32f0xx.h"
 
+BusinessLogic::BusinessLogic()
+	: currentTick(0)
+{
+
+}
+
 void BusinessLogic::delay(const uint32_t timeout)
 {
-	for(uint32_t i = 0; i < timeout; i++);
+	const uint32_t startTick = currentTick;
+	while (currentTick - startTick < timeout);
 }
 
 void BusinessLogic::setOn(const uint32_t channel)
@@ -28,6 +35,23 @@ void BusinessLogic::setRandom(const uint32_t channel, const uint32_t min, const 
 }
 
 void BusinessLogic::setRepeater(const uint32_t channel, const uint32_t sourceChannel)
+{
+
+}
+
+void BusinessLogic::processTick()
+{
+	currentTick++;
+	processChannels();
+	sendData();
+}
+
+void BusinessLogic::sendData()
+{
+
+}
+
+void BusinessLogic::processChannels()
 {
 
 }
