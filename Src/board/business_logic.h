@@ -24,15 +24,15 @@ protected:
 	 */
 	void delay(const uint32_t timeout);
 
-	void setOn(const uint32_t channel);
+	void on(const uint32_t channel);
 
-	void setOff(const uint32_t channel);
+	void off(const uint32_t channel);
 
-	void setPwm(const uint32_t channel, const uint32_t period, const uint32_t dutyCycle);
+	void pwm(const uint32_t channel, const uint32_t period, const uint32_t dutyCycle);
 
-	void setRandom(const uint32_t channel, const uint32_t min, const uint32_t max);
+	void random(const uint32_t channel, const uint32_t min, const uint32_t max);
 
-	void setRepeater(const uint32_t channel, const uint32_t sourceChannel);
+	void repeater(const uint32_t channel, const uint32_t sourceChannel);
 
 private:
 
