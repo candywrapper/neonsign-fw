@@ -1,23 +1,5 @@
 #include "device.h"
-
-class Algorithm : public BusinessLogic {
-public:
-
-	virtual uint32_t getModuleCount() {
-		return 1;
-	}
-
-	void execute() override {
-		for(;;) {
-			delay(500);
-			off(0);
-			delay(500);
-			on(0);
-		}
-	}
-
-};
-
+#include "algorithm.h"
 
 int main(void)
 {
