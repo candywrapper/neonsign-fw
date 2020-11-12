@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include "timer_handler.h"
+#include "spi.h"
+#include "serial_interface.h"
 
 class BusinessLogic : public TimerHandler {
 public:
@@ -16,6 +18,8 @@ public:
 	virtual void execute() = 0;
 
 	void processTick() override;
+
+	void setInterface(SerialInterface &interface);
 
 protected:
 
@@ -36,7 +40,15 @@ protected:
 
 private:
 
+	enum {
+		MAX_MODULE_COUNT = 8,
+	};
+
 	uint32_t currentTick;
+
+	SerialInterface *serialInterface;
+
+	uint8_t serialData[MAX_MODULE_COUNT];
 
 	void sendData();
 

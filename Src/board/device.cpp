@@ -1,11 +1,12 @@
 #include "device.h"
-#include "mcu.h"
 
 Device::Device(BusinessLogic &businessLogic)
 	: m_businessLogic(businessLogic)
 {
-	Mcu mcu;
-	mcu.initialize(businessLogic);
+	mcu.initialize();
+	spi.initialize();
+	m_businessLogic.setInterface(spi);
+	timer.initialize(m_businessLogic);
 }
 
 void Device::operate()

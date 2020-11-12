@@ -2,6 +2,9 @@
 #define BOARD_DEVICE_H_
 
 #include "business_logic.h"
+#include "mcu.h"
+#include "timer.h"
+#include "spi.h"
 
 class Device {
 public:
@@ -11,6 +14,12 @@ public:
 	void operate();
 
 private:
+
+	Mcu mcu;
+
+	Timer timer;
+
+	Spi spi;
 
 	BusinessLogic &m_businessLogic;
 
