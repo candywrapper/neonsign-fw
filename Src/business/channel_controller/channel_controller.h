@@ -16,6 +16,8 @@ protected:
 
 	void setChannelState(const bool active);
 
+	void toggleChannelState();
+
 private:
 
 	uint8_t *m_serialData;

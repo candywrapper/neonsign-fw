@@ -5,6 +5,7 @@
 #include "channel_controller/active_channel.h"
 #include "channel_controller/disactive_channel.h"
 #include "channel_controller/pwm_channel.h"
+#include "channel_controller/random_channel.h"
 
 BusinessLogic::BusinessLogic()
 	: currentTime(0),
@@ -60,7 +61,7 @@ void BusinessLogic::random(const uint32_t channelIndex, const uint32_t min, cons
 {
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
-	channelController[channelIndex] = nullptr;
+	channelController[channelIndex] = new RandomChannel(serialData, channelIndex, min, max);
 }
 
 void BusinessLogic::repeat(const uint32_t channelIndex, const uint32_t sourceChannelIndex)

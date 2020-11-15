@@ -24,11 +24,13 @@ void Algorithm::execute()
 	setModulesCount(2);
 
 	// Установить начальные состояния всех индикаторов
-	off(8);
+	random(0, 25000, 400000);
+	delay(1500000);
+	on(0);
 
 	// Реализовать циклический алгоритм работы индикаторов
 	for(;;) {
-		for (int32_t i = 0; i <= 100; i++) {
+		/*for (int32_t i = 0; i <= 100; i++) {
 			pwm(0, 10000, i);
 			delay(10000);
 		}
@@ -36,6 +38,6 @@ void Algorithm::execute()
 			pwm(0, 10000, i);
 			delay(10000);
 		}
-		delay(150000);
+		delay(150000);*/
 	}
 }
