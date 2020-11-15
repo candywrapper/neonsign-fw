@@ -42,7 +42,7 @@ private:
 		MAX_MODULES_COUNT = 16,
 	};
 
-	uint32_t currentTick;
+	uint64_t currentTime;
 
 	SerialInterface *serialInterface;
 

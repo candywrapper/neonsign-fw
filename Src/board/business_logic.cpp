@@ -1,11 +1,12 @@
 #include <algorithm>
 #include "business_logic.h"
 #include "stm32f0xx.h"
+#include "timer.h"
 
 BusinessLogic::BusinessLogic()
-	: currentTick(0),
+	: currentTime(0),
 	  serialInterface(nullptr),
-	  modulesCount(1)
+	  modulesCount(MIN_MODULES_COUNT)
 {
 
 }
@@ -17,15 +18,15 @@ void BusinessLogic::setModulesCount(const uint8_t count)
 
 void BusinessLogic::delay(const uint32_t timeout)
 {
-	const uint32_t startTick = currentTick;
-	while (currentTick - startTick < timeout);
+	const uint64_t startTime = currentTime;
+	while (currentTime - startTime < (uint64_t)timeout);
 }
 
 void BusinessLogic::on(const uint32_t channelIndex)
 {
 	uint8_t byteIndex = channelIndex / 8;
 	uint8_t bitIndex = channelIndex % 8;
-	serialData[byteIndex] |= 1 << bitIndex;
+	serialData[byteIndex] |= (uint8_t)1 << bitIndex;
 }
 
 void BusinessLogic::off(const uint32_t channelIndex)
@@ -53,7 +54,7 @@ void BusinessLogic::repeat(const uint32_t channelIndex, const uint32_t sourceCha
 
 void BusinessLogic::processTick()
 {
-	currentTick++;
+	currentTime += Timer::TICK_PERIOD_US;
 	processChannels();
 	sendData();
 }

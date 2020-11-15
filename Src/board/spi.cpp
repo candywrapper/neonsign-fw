@@ -11,15 +11,21 @@ void Spi::initialize()
 
 void Spi::send(const uint8_t *data, uint8_t length)
 {
-	SPI1->CR1 |= SPI_CR1_SPE;
+	if (*data & 0x1)
+		SPI1->CR1 |= SPI_CR1_SPE;
+	else
+		SPI1->CR1 &= ~SPI_CR1_SPE;
 
-	while (length--) {
-		while (!(SPI1->SR & SPI_SR_TXE));
-		*(__IO uint8_t *)&(SPI1->DR) = *(data++);
-	}
-	while (!(SPI1->SR & SPI_SR_TXE));
 
-	SPI1->CR1 &= ~SPI_CR1_SPE;
+//	SPI1->CR1 |= SPI_CR1_SPE;
+
+//	while (length--) {
+//		while (!(SPI1->SR & SPI_SR_TXE));
+//		*(__IO uint8_t *)&(SPI1->DR) = *(data++);
+//	}
+//	while (!(SPI1->SR & SPI_SR_TXE));
+
+//	SPI1->CR1 &= ~SPI_CR1_SPE;
 }
 
 void Spi::configureMosiPort()

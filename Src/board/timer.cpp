@@ -16,7 +16,7 @@ void Timer::initialize(TimerHandler &timerHandler)
 }
 
 void Timer::configureSysTick() {
-	SysTick_Config(CLOCK_FREQ / 1000); // 1 ms interrupt
+	SysTick_Config(CLOCK_FREQ / 1000000 * TICK_PERIOD_US); // 100 us interrupt
 }
 
 extern "C" {

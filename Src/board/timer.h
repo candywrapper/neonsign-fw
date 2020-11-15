@@ -6,6 +6,10 @@
 class Timer {
 public:
 
+	enum {
+		TICK_PERIOD_US = 100,
+	};
+
 	static void processTick();
 
 	void initialize(TimerHandler &timerHandler);
