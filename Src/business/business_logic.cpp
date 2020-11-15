@@ -4,6 +4,7 @@
 #include "timer.h"
 #include "channel_controller/active_channel.h"
 #include "channel_controller/disactive_channel.h"
+#include "channel_controller/pwm_channel.h"
 
 BusinessLogic::BusinessLogic()
 	: currentTime(0),
@@ -52,18 +53,21 @@ void BusinessLogic::pwm(const uint32_t channelIndex, const uint32_t period, cons
 {
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
+	channelController[channelIndex] = new PwmChannel(serialData, channelIndex, period, dutyCycle);
 }
 
 void BusinessLogic::random(const uint32_t channelIndex, const uint32_t min, const uint32_t max)
 {
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
+	channelController[channelIndex] = nullptr;
 }
 
 void BusinessLogic::repeat(const uint32_t channelIndex, const uint32_t sourceChannelIndex)
 {
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
+	channelController[channelIndex] = nullptr;
 }
 
 void BusinessLogic::processTick()

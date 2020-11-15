@@ -28,18 +28,14 @@ void Algorithm::execute()
 
 	// Реализовать циклический алгоритм работы индикаторов
 	for(;;) {
-/*		on(0);
-		delay(i);
-		if (i > 7000)
-			i = 1;
-		else
-			i += 6;
-		off(0);
-		delay(10000);*/
-
-		on(0);
-		delay(100000);
-		off(0);
-		delay(100000);
+		for (int32_t i = 0; i <= 100; i++) {
+			pwm(0, 10000, i);
+			delay(10000);
+		}
+		for (int32_t i = 100; i >= 0; i--) {
+			pwm(0, 10000, i);
+			delay(10000);
+		}
+		delay(150000);
 	}
 }
