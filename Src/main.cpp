@@ -1,4 +1,4 @@
-#include "device.h"
+#include "board/device.h"
 #include "algorithm.h"
 
 int main(void)

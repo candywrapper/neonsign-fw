@@ -5,13 +5,14 @@
 #include "timer_handler.h"
 #include "spi.h"
 #include "serial_interface.h"
+#include "channel_controller/channel_controller.h"
 
 class BusinessLogic : public TimerHandler {
 public:
 
 	BusinessLogic();
 
-	virtual ~BusinessLogic() = default;
+	virtual ~BusinessLogic();
 
 	virtual void execute() = 0;
 
@@ -29,7 +30,7 @@ protected:
 
 	void off(const uint32_t channelIndex);
 
-	void pwm(const uint32_t channelIndex, const uint32_t period, const uint32_t dutyCycle);
+	void pwm(const uint32_t channelIndex, const uint32_t period, const uint8_t dutyCycle);
 
 	void random(const uint32_t channelIndex, const uint32_t min, const uint32_t max);
 
@@ -39,7 +40,9 @@ private:
 
 	enum {
 		MIN_MODULES_COUNT = 1,
-		MAX_MODULES_COUNT = 16,
+		MAX_MODULES_COUNT = 8,
+		MODULE_CHANNELS_COUNT = 8,
+		MAX_CHANNELS = (MAX_MODULES_COUNT * MODULE_CHANNELS_COUNT)
 	};
 
 	uint64_t currentTime;
@@ -49,6 +52,8 @@ private:
 	uint8_t serialData[MAX_MODULES_COUNT];
 
 	uint8_t modulesCount;
+
+	ChannelController *channelController[MAX_CHANNELS];
 
 	void sendData();
 

@@ -24,19 +24,22 @@ void Algorithm::execute()
 	setModulesCount(2);
 
 	// Установить начальные состояния всех индикаторов
-	for(uint8_t i = 0; i < 16; i++)
-		on(i);
-uint32_t i=1;
+	off(8);
+
 	// Реализовать циклический алгоритм работы индикаторов
 	for(;;) {
-		on(0);
+/*		on(0);
 		delay(i);
 		if (i > 7000)
 			i = 1;
 		else
 			i += 6;
 		off(0);
-		delay(10000);
+		delay(10000);*/
 
+		on(0);
+		delay(100000);
+		off(0);
+		delay(100000);
 	}
 }

@@ -1,7 +1,7 @@
 #ifndef ALGORITHM_H_
 #define ALGORITHM_H_
 
-#include "business_logic.h"
+#include "business/business_logic.h"
 
 class Algorithm : public BusinessLogic {
 public:
