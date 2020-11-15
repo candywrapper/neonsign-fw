@@ -6,8 +6,6 @@
 class Algorithm : public BusinessLogic {
 public:
 
-	uint32_t getModuleCount() override;
-
 	void execute() override;
 
 };

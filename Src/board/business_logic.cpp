@@ -1,11 +1,18 @@
+#include <algorithm>
 #include "business_logic.h"
 #include "stm32f0xx.h"
 
 BusinessLogic::BusinessLogic()
 	: currentTick(0),
-	  serialInterface(nullptr)
+	  serialInterface(nullptr),
+	  modulesCount(1)
 {
 
+}
+
+void BusinessLogic::setModulesCount(const uint8_t count)
+{
+	modulesCount = std::min((uint8_t)MAX_MODULES_COUNT, std::max((uint8_t)MIN_MODULES_COUNT, count));
 }
 
 void BusinessLogic::delay(const uint32_t timeout)
@@ -59,7 +66,7 @@ void BusinessLogic::setInterface(SerialInterface &interface)
 void BusinessLogic::sendData()
 {
 	if (serialInterface)
-		serialInterface->send(serialData, getModuleCount());
+		serialInterface->send(serialData, modulesCount);
 }
 
 void BusinessLogic::processChannels()

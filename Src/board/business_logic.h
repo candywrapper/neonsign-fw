@@ -13,8 +13,6 @@ public:
 
 	virtual ~BusinessLogic() = default;
 
-	virtual uint32_t getModuleCount() = 0;
-
 	virtual void execute() = 0;
 
 	void processTick() override;
@@ -23,9 +21,8 @@ public:
 
 protected:
 
-	/**
-	 * @param timeout ms
-	 */
+	void setModulesCount(const uint8_t count);
+
 	void delay(const uint32_t timeout);
 
 	void on(const uint32_t channelIndex);
@@ -41,14 +38,17 @@ protected:
 private:
 
 	enum {
-		MAX_MODULE_COUNT = 8,
+		MIN_MODULES_COUNT = 1,
+		MAX_MODULES_COUNT = 16,
 	};
 
 	uint32_t currentTick;
 
 	SerialInterface *serialInterface;
 
-	uint8_t serialData[MAX_MODULE_COUNT];
+	uint8_t serialData[MAX_MODULES_COUNT];
+
+	uint8_t modulesCount;
 
 	void sendData();
 
