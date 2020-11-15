@@ -6,6 +6,7 @@
 #include "channel_controller/disactive_channel.h"
 #include "channel_controller/pwm_channel.h"
 #include "channel_controller/random_channel.h"
+#include "channel_controller/repeat_channel.h"
 
 BusinessLogic::BusinessLogic()
 	: currentTime(0),
@@ -68,7 +69,7 @@ void BusinessLogic::repeat(const uint32_t channelIndex, const uint32_t sourceCha
 {
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
-	channelController[channelIndex] = nullptr;
+	channelController[channelIndex] =  new RepeatChannel(serialData, channelIndex, sourceChannelIndex, &(channelController[sourceChannelIndex]));
 }
 
 void BusinessLogic::processTick()

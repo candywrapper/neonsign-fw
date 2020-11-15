@@ -1,6 +1,6 @@
 #include <algorithm>
 #include <math.h>
-#include <channel_controller/pwm_channel.h>
+#include "pwm_channel.h"
 
 PwmChannel::PwmChannel(uint8_t *serialData, const uint8_t channelIndex, const uint32_t period, const uint8_t dutyCycle)
  	 : ChannelController(serialData, channelIndex),
