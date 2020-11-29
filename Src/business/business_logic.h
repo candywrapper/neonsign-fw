@@ -5,6 +5,7 @@
 #include "timer_handler.h"
 #include "timer.h"
 #include "spi.h"
+#include "di.h"
 #include "serial_interface.h"
 #include "channel_controller/channel_controller.h"
 
@@ -21,9 +22,13 @@ public:
 
 	void setInterface(SerialInterface &interface);
 
+	void setDi(Di &input);
+
 protected:
 
 	void setModulesCount(const uint8_t count);
+
+	bool input(const uint32_t channelIndex);
 
 	void delay(const uint32_t timeout);
 
@@ -51,6 +56,8 @@ private:
 	uint64_t currentTime;
 
 	SerialInterface *serialInterface;
+
+	Di *di;
 
 	uint8_t serialData[MAX_MODULES_COUNT];
 

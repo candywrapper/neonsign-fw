@@ -30,6 +30,11 @@ void BusinessLogic::setModulesCount(const uint8_t count)
 	modulesCount = std::min((uint8_t)MAX_MODULES_COUNT, std::max((uint8_t)MIN_MODULES_COUNT, count));
 }
 
+bool BusinessLogic::input(const uint32_t channelIndex)
+{
+	return di->getState(channelIndex);
+}
+
 void BusinessLogic::delay(const uint32_t timeout)
 {
 	const uint64_t startTime = currentTime;
@@ -91,6 +96,11 @@ void BusinessLogic::processTick()
 void BusinessLogic::setInterface(SerialInterface &interface)
 {
 	serialInterface = &interface;
+}
+
+void BusinessLogic::setDi(Di &input)
+{
+	di = &input;
 }
 
 void BusinessLogic::sendData()

@@ -5,6 +5,7 @@
 #include "mcu.h"
 #include "timer.h"
 #include "spi.h"
+#include "di.h"
 
 class Device {
 public:
@@ -20,6 +21,8 @@ private:
 	Timer timer;
 
 	Spi spi;
+
+	Di di;
 
 	BusinessLogic &m_businessLogic;
 
