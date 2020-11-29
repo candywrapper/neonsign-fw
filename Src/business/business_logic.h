@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "timer_handler.h"
+#include "timer.h"
 #include "spi.h"
 #include "serial_interface.h"
 #include "channel_controller/channel_controller.h"
@@ -30,8 +31,6 @@ protected:
 
 	void off(const uint32_t channelIndex);
 
-	void pwm(const uint32_t channelIndex, const uint32_t period, const uint8_t dutyCycle);
-
 	void random(const uint32_t channelIndex, const uint32_t min, const uint32_t max);
 
 	void repeat(const uint32_t channelIndex, const uint32_t sourceChannelIndex);
@@ -39,6 +38,8 @@ protected:
 private:
 
 	enum {
+		USEC_IN_MSEC = 1000,
+		TIMER_PERIOD_MSEC = (Timer::TICK_PERIOD_US / USEC_IN_MSEC),
 		MIN_MODULES_COUNT = 1,
 		MAX_MODULES_COUNT = 8,
 		MODULE_CHANNELS_COUNT = 8,

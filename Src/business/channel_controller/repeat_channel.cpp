@@ -17,6 +17,6 @@ void RepeatChannel::updateState(const uint64_t currentTime)
 	if (sourceController != nullptr)
 		sourceController->updateState(currentTime);
 
-	const bool sourceChannelState = (m_serialData[sourceByteIndex] & sourceBitMask) != 0;
+	const bool sourceChannelState = (m_serialData[sourceByteIndex] & sourceBitMask) == 0;
 	setChannelState(sourceChannelState);
 }

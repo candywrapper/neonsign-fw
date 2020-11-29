@@ -7,10 +7,12 @@ class Timer {
 public:
 
 	enum {
-		TICK_PERIOD_US = 100,
+		TICK_PERIOD_US = 1000,
 	};
 
 	static void processTick();
+
+	static void setIrqState(const bool state);
 
 	void initialize(TimerHandler &timerHandler);
 

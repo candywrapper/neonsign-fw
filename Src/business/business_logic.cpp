@@ -1,21 +1,20 @@
 #include <algorithm>
 #include "business_logic.h"
 #include "stm32f0xx.h"
-#include "timer.h"
 #include "channel_controller/active_channel.h"
 #include "channel_controller/disactive_channel.h"
-#include "channel_controller/pwm_channel.h"
 #include "channel_controller/random_channel.h"
 #include "channel_controller/repeat_channel.h"
+
 
 BusinessLogic::BusinessLogic()
 	: currentTime(0),
 	  serialInterface(nullptr),
 	  modulesCount(MIN_MODULES_COUNT)
 {
+	Timer::setIrqState(true);
 	for (uint8_t i = 0; i < MAX_MODULES_COUNT * MODULE_CHANNELS_COUNT; i++)
 		channelController[i] = nullptr;
-
 }
 
 BusinessLogic::~BusinessLogic()
@@ -38,43 +37,43 @@ void BusinessLogic::delay(const uint32_t timeout)
 
 void BusinessLogic::on(const uint32_t channelIndex)
 {
+	Timer::setIrqState(false);
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
 	channelController[channelIndex] = new ActiveChannel(serialData, channelIndex);
+	Timer::setIrqState(true);
 }
 
 void BusinessLogic::off(const uint32_t channelIndex)
 {
+	Timer::setIrqState(false);
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
 	channelController[channelIndex] = new DisactiveChannel(serialData, channelIndex);
-}
-
-
-void BusinessLogic::pwm(const uint32_t channelIndex, const uint32_t period, const uint8_t dutyCycle)
-{
-	if (channelController[channelIndex] != nullptr)
-		delete channelController[channelIndex];
-	channelController[channelIndex] = new PwmChannel(serialData, channelIndex, period, dutyCycle);
+	Timer::setIrqState(true);
 }
 
 void BusinessLogic::random(const uint32_t channelIndex, const uint32_t min, const uint32_t max)
 {
+	Timer::setIrqState(false);
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
 	channelController[channelIndex] = new RandomChannel(serialData, channelIndex, min, max);
+	Timer::setIrqState(true);
 }
 
 void BusinessLogic::repeat(const uint32_t channelIndex, const uint32_t sourceChannelIndex)
 {
+	Timer::setIrqState(false);
 	if (channelController[channelIndex] != nullptr)
 		delete channelController[channelIndex];
 	channelController[channelIndex] =  new RepeatChannel(serialData, channelIndex, sourceChannelIndex, &(channelController[sourceChannelIndex]));
+	Timer::setIrqState(true);
 }
 
 void BusinessLogic::processTick()
 {
-	currentTime += Timer::TICK_PERIOD_US;
+	currentTime += TIMER_PERIOD_MSEC;
 	processChannels();
 	sendData();
 }

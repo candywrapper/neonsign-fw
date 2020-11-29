@@ -9,6 +9,14 @@ void Timer::processTick()
 		tHandler->processTick();
 }
 
+void Timer::setIrqState(const bool state)
+{
+	if (state)
+		NVIC_EnableIRQ(SysTick_IRQn);
+	else
+		NVIC_DisableIRQ(SysTick_IRQn);
+}
+
 void Timer::initialize(TimerHandler &timerHandler)
 {
 	configureSysTick();
