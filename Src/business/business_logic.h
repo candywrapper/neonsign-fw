@@ -35,6 +35,8 @@ protected:
 
 	void repeat(const uint32_t channelIndex, const uint32_t sourceChannelIndex);
 
+	void invert(const uint32_t channelIndex, const uint32_t sourceChannelIndex);
+
 private:
 
 	enum {
