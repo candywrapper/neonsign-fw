@@ -30,12 +30,16 @@ void Algorithm::execute()
 
 	// Реализовать циклический алгоритм работы индикаторов
 	for(;;) {
+		on(0);
+		delay(500);
+		off(0);
+		delay(500);
 		if (input(0))
 			for(;;) {
 				on(0);
-				delay(500);
+				delay(1500);
 				off(0);
-				delay(500);
+				delay(1500);
 				if (input(1))
 					break;
 			}

@@ -11,9 +11,9 @@ ChannelController::ChannelController(uint8_t *serialData, const uint8_t channelI
 void ChannelController::setChannelState(const bool active)
 {
 	if (active)
-		m_serialData[byteIndex] &= ~bitMask;
-	else
 		m_serialData[byteIndex] |= bitMask;
+	else
+		m_serialData[byteIndex] &= ~bitMask;
 }
 
 void ChannelController::toggleChannelState()
