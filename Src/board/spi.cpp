@@ -39,6 +39,7 @@ void Spi::configureNssPort()
 {
 	GPIOA->OSPEEDR |= GPIO_OSPEEDR_OSPEEDR4_0 | GPIO_OSPEEDR_OSPEEDR4_1;
 	GPIOA->MODER |= GPIO_MODER_MODER4_1;
+	GPIOA->PUPDR |= GPIO_PUPDR_PUPDR4_0;
 }
 
 void Spi::configureInterface()
