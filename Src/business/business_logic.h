@@ -30,6 +30,10 @@ protected:
 
 	bool input(const uint32_t channelIndex);
 
+	bool rised(const uint32_t channelIndex);
+
+	bool fallen(const uint32_t channelIndex);
+
 	void delay(const uint32_t timeout);
 
 	void on(const uint32_t channelIndex);

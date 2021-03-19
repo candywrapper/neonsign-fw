@@ -35,6 +35,16 @@ bool BusinessLogic::input(const uint32_t channelIndex)
 	return di->getState(channelIndex);
 }
 
+bool BusinessLogic::rised(const uint32_t channelIndex)
+{
+    return di->getRised(channelIndex);
+}
+
+bool BusinessLogic::fallen(const uint32_t channelIndex)
+{
+    return di->getFallen(channelIndex);
+}
+
 void BusinessLogic::delay(const uint32_t timeout)
 {
 	const uint64_t startTime = currentTime;

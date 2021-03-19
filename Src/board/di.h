@@ -10,12 +10,17 @@ public:
 
 	bool getState(const uint8_t index);
 
+	bool getRised(const uint8_t index);
+
+	bool getFallen(const uint8_t index);
+
 private:
 
 	struct PortInfo {
 		GPIO_TypeDef *port;
 		uint32_t pupdrMask;
 		uint32_t idrMask;
+		bool prevState;
 	};
 
 	static PortInfo portInfo[];
